@@ -1,0 +1,48 @@
+.landing-page {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.greeting-container {
+  display: flex;
+  flex-direction: column;
+  
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  /* border: 1px solid black; */
+  height: 50%;
+  width: 50%;
+  margin-left: 25%;
+
+  background-color: rgba(255, 242, 219, 0.25);
+  box-shadow: 4px 4px 4px rgba(219, 131, 68, 0.7);
+}
+
+.greeting-container .title {
+  padding: 0px 20px;
+  padding-bottom: 25px;
+  font-family: 'consolas';
+}
+.greeting-container .description {
+  padding-top: 0px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+
+.greeting-container button {
+  width: 150px;
+  height: 35px;
+
+  margin-bottom: 10px;
+}
+
+.greeting-container .terms {
+
+}

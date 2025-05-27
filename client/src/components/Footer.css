@@ -1,0 +1,26 @@
+.footer-container {
+  display: flex;
+  background-color: rgba(255, 242, 219, 0.25);
+
+  margin-top: 10px;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  /* border: 1px solid black; */
+}
+
+.footer-container .left {
+  flex: 1;
+}
+
+.footer-container .right {
+  flex: 1;
+  display: flex;
+
+  padding-left: 50%;
+  justify-content:space-around;
+}

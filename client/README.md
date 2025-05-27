@@ -9,6 +9,7 @@ Currently, two official plugins are available:
 
 ## Links I've used for sources
 1. [for cats' svgs](https://www.svgrepo.com/vectors/cat/4)
+2. https://fonts.google.com/selection/embed
 
 ## Expanding the ESLint configuration
 
