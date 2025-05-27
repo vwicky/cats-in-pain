@@ -18,6 +18,8 @@ function ChatPage() {
   const [result, setResult] = useState(null);
   const [isWaiting, setIsWaiting] = useState(false)
 
+  const [uploadedImage, setUploadedImage] = useState(null);
+
   // for a time being
   const makeMockOutput = async (waitTime) => {
     const randomHealthyPercent = Math.round(Math.random() * 100);
@@ -78,7 +80,23 @@ function ChatPage() {
 
             <label htmlFor="text">Input text prompt</label>
             <input type="text" name='text'/>
-            <input type="file" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  const imageUrl = URL.createObjectURL(file);
+                  setUploadedImage(imageUrl);
+                }
+              }}
+            />
+            {uploadedImage && (
+              <div className="image-preview">
+                <p>Uploaded image:</p>
+                <img src={uploadedImage} alt="Uploaded preview" />
+              </div>
+            )}
 
             <button onClick={generateResult}>Generate Results</button>
           </div>
@@ -87,13 +105,27 @@ function ChatPage() {
 
             {
               isWaiting ?
-                  (<p>generating response⚖</p>) :
+                  (<div className="loader" />) :
                   result === null ?
                     (<p>waiting for prompt</p>) :
-                    (<>
-                      <p>results are: healthy {result.healthy}%, ill: {result.ill}%</p>
-                      <p>explanation: {result.additional.explanation}</p>
-                    </>)
+                    (<div className="result-animation result-bar-container">
+                      <h3>Health Analysis</h3>
+                      <div className="bar-chart">
+                        <div
+                          className="bar healthy"
+                          style={{ width: `${result.healthy}%` }}
+                        >
+                          {result.healthy}% Healthy
+                        </div>
+                        <div
+                          className="bar ill"
+                          style={{ width: `${result.ill}%` }}
+                        >
+                          {result.ill}% Not Healthy
+                        </div>
+                      </div>
+                      <p className="explanation">📝 {result.additional.explanation}</p>
+                    </div>)
             }
           </div>
         </div>
