@@ -55,6 +55,11 @@ function ChatPage() {
   }
 
   const generateResult = async () => {
+    if (isWaiting) {
+      alert('Please, wait for previous response to generate')
+      return
+    }
+
     // TODO: change to normal generation
     const input = makeMockInput()
     const result = await makeMockOutput()
@@ -101,7 +106,7 @@ function ChatPage() {
             <button onClick={generateResult}>Generate Results</button>
           </div>
           <div className="right">
-            <h2>resultshere</h2>
+            <h2>results here</h2>
 
             {
               isWaiting ?
