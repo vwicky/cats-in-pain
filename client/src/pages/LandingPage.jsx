@@ -6,6 +6,10 @@ import './LandingPage.css'
 
 function LandingPage() {
 
+  const beginPromptingFunc = () => {
+    window.location.href = "/chat"
+  }
+
   return (
     <div className='landing-page'>
       <Header />
@@ -14,7 +18,7 @@ function LandingPage() {
         <h1 className='title'>Check your cat's aches with powerful AI models</h1>
         <p className='description'>Upload a photo, text description or a video of a cat to dicover his inner state</p>
       
-        <button>Begin Prompting</button>
+        <button onClick={beginPromptingFunc}>Begin Prompting</button>
         <a href="/" className='terms'>see terms & conditions</a>
       </div>
 
