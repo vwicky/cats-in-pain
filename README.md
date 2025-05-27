@@ -24,8 +24,6 @@ This project is developed as part of a Data Science term paper to explore the in
 ## 💡 Future Work
 
 - Model improvements using more diverse datasets
-- Real-time video stream analysis
-- API endpoints for mobile integration
 - User feedback loop for continuous learning
 
 ---
