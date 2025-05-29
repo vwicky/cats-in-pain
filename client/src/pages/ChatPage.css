@@ -1,10 +1,30 @@
+:root {
+  /* Keep base variables here */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --accent-color: #db8344;
+  --container-bg: rgba(255, 242, 219, 0.25);
+}
+
+/* Dark theme example (if applied via [data-theme="dark"]) */
+[data-theme='dark'] {
+  --bg-color: #1a1a1a;
+  --text-color: #eaeaea;
+  --accent-color: #c56f35;
+  --container-bg: rgba(60, 60, 60, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .chatpage {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fdfdfd;
-  color: #333;
+  background-color: var(--container-bg);
+  color: var(--text-color);
 }
 
 .chat-container {
@@ -14,8 +34,8 @@
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(219, 131, 68, 0.7);
-  background-color: #fff;
+  background-color: var(--bg-color);
+  box-shadow: 0 0 12px var(--accent-color);
   padding: 1rem;
 }
 
@@ -23,22 +43,16 @@
   display: flex;
   gap: 1rem;
   flex: 1;
+  flex-wrap: wrap;
 }
 
 .prompt-result-container .left,
 .prompt-result-container .right {
   flex: 1;
+  min-width: 300px;
   padding: 1rem;
   border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.prompt-result-container .left {
-  /* border-right: 1px solid #ddd; */
-}
-
-.prompt-result-container .right {
-  /* border-left: 1px solid #ddd; */
+  background-color: var(--bg-color);
 }
 
 label {
@@ -50,16 +64,18 @@ label {
 input[type="text"],
 input[type="file"] {
   display: block;
-  width: 90%;
+  width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 button {
-  background-color: #db8344;
-  color: white;
+  background-color: var(--accent-color);
+  color: #fff;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -69,25 +85,23 @@ button {
 }
 
 button:hover {
-  background-color: #c56f35;
+  background-color: #b95e20;
 }
 
 .prompt-history {
   margin-top: 1rem;
-  border-top: 1px solid #db8344;
+  border-top: 1px solid var(--accent-color);
   padding-top: 1rem;
   max-height: 100px;
-  min-height: 100px;
   overflow-y: auto;
 }
 
 .prompt-history .item {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
 }
 
-/* WAITING ANIMATION */
-
+/* Animation */
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
@@ -103,10 +117,10 @@ button:hover {
   animation: fadeSlideIn 0.5s ease-out;
 }
 
-/* LOADING SPINNER */
+/* Loading Spinner */
 .loader {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #db8344;
+  border-top: 4px solid var(--accent-color);
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -119,7 +133,7 @@ button:hover {
   100% { transform: rotate(360deg); }
 }
 
-/* RESULTS ANIMATION */
+/* Result Bar */
 .result-bar-container {
   margin-top: 1rem;
   animation: fadeSlideIn 0.5s ease-out;
@@ -145,11 +159,11 @@ button:hover {
 }
 
 .bar.healthy {
-  background-color: #4caf50; /* green */
+  background-color: #4caf50;
 }
 
 .bar.ill {
-  background-color: #f44336; /* red */
+  background-color: #f44336;
 }
 
 .explanation {
@@ -157,10 +171,11 @@ button:hover {
   font-style: italic;
 }
 
-/* IMAGES  */
+/* Image Preview */
 .image-preview {
   margin-top: 1rem;
-
+  display: flex;
+  justify-content: center;
 }
 
 .image-preview img {
