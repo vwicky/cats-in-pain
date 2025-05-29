@@ -6,7 +6,7 @@ import imageLogo from '../assets/cat.svg'
 import './SignInPage.css'
 import { Link } from 'react-router'
 
-function SignInPage() {
+function SignUpPage() {
 
   const handleSignIn = (e) => {
     e.preventDefault()
@@ -19,20 +19,21 @@ function SignInPage() {
 
       <div className="form-container">
         <Link to="/"><img src={imageLogo} className='image-logo-signin' alt="cat logo"></img></Link>
-        <h1 className='title'>Welcome Back</h1>
-        <p className='description'>Sign in to continue checking your cat's health</p>
+        <h1 className='title'>Welcome Thee O Cute Kitty</h1>
+        <p className='description'>Sign up to begin checking your cat's health</p>
 
         <form onSubmit={handleSignIn}>
+          <input type="text" placeholder="Username" required />
           <input type="email" placeholder="Email" required />
           <input type="password" placeholder="Password" required />
-          <button type="submit">Sign In</button>
+          <button type="submit">Sign Up</button>
         </form>
 
-        <a href="/signup" className='terms'>Don't have an account? Sign Up!</a>
+        <a href="/signin" className='terms'>Already have an account? Sign In!</a>
       </div>
 
     </div>
   )
 }
 
-export default SignInPage
+export default SignUpPage
