@@ -18,7 +18,7 @@ function Header() {
         <img src={imageLogo} className='image-logo' alt="cat logo"></img>
       </div>
       <div className="right">
-        <p>User</p>
+        <Link to="/signin"><p>User</p></Link>
       </div>
     </header>
   )

@@ -1,0 +1,79 @@
+.sign-in-page {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+}
+
+.image-logo-signin {
+  width: 20%;
+  padding: 0;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 60%;
+  max-height: 100%;
+  width: 40%;
+  margin-left: 30%;
+
+  background-color: rgba(255, 242, 219, 0.25);
+  box-shadow: 4px 4px 4px rgba(219, 131, 68, 0.7);
+}
+
+.form-container .title {
+  padding: 0px 20px;
+  padding-bottom: 15px;
+  font-family: 'consolas';
+}
+
+.form-container .description {
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.form-container input {
+  padding: 10px;
+  border: 1px solid #db8344;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-container button {
+  background-color: #db8344;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #c56f35;
+}
+
+.form-container .terms {
+  text-decoration: none;
+  color: rgba(155, 155, 155, 0.8);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
