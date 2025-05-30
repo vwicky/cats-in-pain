@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router'
 import './Header.css'
 
-import { Link } from 'react-router';
 import imageLogo from '../assets/cat.svg'
 
 const mockUser = {
@@ -17,12 +17,8 @@ function Header() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId') || null;
-
-    if (userId !== null) {
-      // TODO: mock user here
-      setUser(mockUser)
-    } 
+    const userId = localStorage.getItem('userId')
+    if (userId) setUser(mockUser)
   }, [])
 
   useEffect(() => {
@@ -40,25 +36,25 @@ function Header() {
 
   return (
     <header className="header-container">
-      <div className="left">
-        <div className="navbar-container">
-          <p className='more-link'>About</p>
-          <Link to="https://github.com/vwicky/cats-in-pain" className='more-link'>GitHub</Link>
-        </div>
+      <div className="header-left navbar-container">
+        <Link to="/about" className="nav-link">About</Link>
+        <a href="https://github.com/vwicky/cats-in-pain" className="nav-link" target="_blank" rel="noreferrer">GitHub</a>
       </div>
-      <div className="center">
-        <h1 onClick={() => window.location.href="/"}>Cat's in Pain</h1>
-        <img src={imageLogo} className='image-logo' alt="cat logo"></img>
+
+      <div className="center" onClick={() => window.location.href = '/'}>
+        <h1 className="site-title">Cat's in Pain</h1>
+        <img src={imageLogo} className="image-logo" alt="cat logo" />
       </div>
-      <div className="right">
+
+      <div className="header-right">
         <button onClick={toggleTheme} className="theme-toggle">
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+          {theme === 'light' ? '🌙' : '☀️'}
         </button>
-        {
-          user === null ?
-            (<Link to="/signin"><p>User</p></Link>) :
-            (<Link to={`/user/${user.id}`}><p>{user.username}</p></Link>)
-        }
+        {user ? (
+          <Link to={`/user/${user.id}`} className="nav-link">{user.username}</Link>
+        ) : (
+          <Link to="/signin" className="nav-link">Sign In</Link>
+        )}
       </div>
     </header>
   )

@@ -1,71 +1,94 @@
 .header-container {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  background-color: rgba(255, 242, 219, 0.25);
-  padding: 15px 15px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  padding: 15px 30px;
   margin-bottom: 10px;
 
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-  /* border-bottom: 1px solid black; */
+  box-shadow: 0 2px 8px rgba(219, 131, 68, 0.3);
 }
 
-.header-container .navbar-container {
+/* LEFT NAV */
+.navbar-container {
   display: flex;
-  
-  /* border: 1px solid black; */
-  justify-content: space-around;
+  gap: 1.2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-color, #db8344);
+}
+
+/* CENTER LOGO */
+.center {
+  display: flex;
   align-items: center;
-
-  padding-right: 40px;
-
-  height: 100%;
+  gap: 10px;
+  cursor: pointer;
 }
-.header-container .navbar-container .more-link {
-  /* margin: 15px; */
-  font-size: 18px;
-  font-weight: normal;
-}
-.header-container .image-logo {
-  height: 50px;
 
-  /* border: 1px solid black; */
+.image-logo {
+  height: 40px;
+}
+
+.site-title {
+  font-family: "Playwrite HU", cursive;
+  font-size: 1.5rem;
   margin: 0;
 }
 
-.header-container .left {
-  flex: 1;
-
-  text-align: left;
+/* RIGHT SIDE */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.header-container .center {
-  flex: 1;
-  display: flex;
-  
-  align-items: center;
-  justify-content: center;
-
-  font-family: "Playwrite HU", cursive;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-
-  padding-left: 15px;
-  padding-right: 15px;
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
-.header-container .right {
-  flex: 1;
-  display: flex;
+.theme-toggle:hover {
+  color: var(--accent-color, #db8344);
+}
 
-  /* border: 1px solid black; */
-  padding-right: 10px;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
 
-  font-size: 18px;
-  font-weight: normal;
-  font-style: normal;
+  .center {
+    flex-direction: column;
+  }
 
-  align-items: center;
-  justify-content: right;
+  .navbar-container,
+  .header-right {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
 }
