@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import './UserPage.css'
+import { useParams } from 'react-router'
+
+const mockUser = {
+  id: 1,
+  username: "Adam",
+  email: "adam@example.com",
+  memberSince: "March 2024",
+  catsUploaded: 17
+}
 
 function UserPage() {
-  const user = {
-    username: "whiskerlover99",
-    email: "catmom@example.com",
-    memberSince: "March 2024",
-    catsUploaded: 17
-  }
+  const { id } = useParams()
+  const [user, setUser] = useState(mockUser)
+
+  useEffect(() => {
+    // TODO: implement finding use by email
+    console.log(id);
+    
+    if (id === mockUser.id) {
+      alert("we're mocking!")
+    }
+    setUser(mockUser)
+  }, [])
 
   return (
     <div className='user-page'>

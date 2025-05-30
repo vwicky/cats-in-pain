@@ -4,8 +4,26 @@ import './Header.css'
 import { Link } from 'react-router';
 import imageLogo from '../assets/cat.svg'
 
+const mockUser = {
+  id: 1,
+  username: "Adam",
+  email: "adam@example.com",
+  memberSince: "March 2024",
+  catsUploaded: 17
+}
+
 function Header() {
   const [theme, setTheme] = useState('light')
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId') || null;
+
+    if (userId !== null) {
+      // TODO: mock user here
+      setUser(mockUser)
+    } 
+  }, [])
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light'
@@ -36,7 +54,11 @@ function Header() {
         <button onClick={toggleTheme} className="theme-toggle">
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
-        <Link to="/signin"><p>User</p></Link>
+        {
+          user === null ?
+            (<Link to="/signin"><p>User</p></Link>) :
+            (<Link to={`/user/${user.id}`}><p>{user.username}</p></Link>)
+        }
       </div>
     </header>
   )

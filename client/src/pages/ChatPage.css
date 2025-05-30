@@ -41,7 +41,7 @@
 
 .prompt-result-container {
   display: flex;
-  gap: 1rem;
+  /* gap: 1rem; */
   flex: 1;
   flex-wrap: wrap;
 }
@@ -51,8 +51,15 @@
   flex: 1;
   min-width: 300px;
   padding: 1rem;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   background-color: var(--bg-color);
+}
+
+.prompt-result-container .left {
+  border-right: 1px solid var(--accent-color);
+}
+.prompt-result-container .right {
+  border-left: 1px solid var(--accent-color);
 }
 
 label {

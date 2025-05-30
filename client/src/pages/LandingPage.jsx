@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -9,6 +9,12 @@ function LandingPage() {
   const beginPromptingFunc = () => {
     window.location.href = "/chat"
   }
+
+  useEffect(() => {
+    localStorage.removeItem('userId')
+    console.log(localStorage.getItem('userId'));
+    
+  }, [])
 
   return (
     <div className='landing-page'>

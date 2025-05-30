@@ -17,7 +17,7 @@ function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/user" element={<UserPage />} />
+        <Route path="/user/:id" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   )
