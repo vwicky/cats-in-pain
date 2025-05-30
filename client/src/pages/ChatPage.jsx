@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 
 import './ChatPage.css'
+import { useSearchParams } from 'react-router'
 
 const mockPromptItem = {
   date: new Date().toDateString(),
@@ -17,6 +18,11 @@ function ChatPage() {
   const [prompts, setPrompts] = useState([])
   const [result, setResult] = useState(null);
   const [isWaiting, setIsWaiting] = useState(false)
+
+  const [searchParams] = useSearchParams();
+  const incomingPrompt = searchParams.get('prompt') || '';
+
+  const [currentTextInput, setCurrentTextInput] = useState('')
 
   const [uploadedImage, setUploadedImage] = useState(null);
 
@@ -84,7 +90,7 @@ function ChatPage() {
             <h2>prompting here</h2>
 
             <label htmlFor="text">Input text prompt</label>
-            <input type="text" name='text'/>
+            <input type="text" name='text' placeholder={incomingPrompt} onChange={(e) => setCurrentTextInput(e.target.value)}/>
             <input
               type="file"
               accept="image/*"
