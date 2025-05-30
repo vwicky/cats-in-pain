@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './db/mongodb.js'
 
 import promptRoutes from './routes/prompt.js';
+import authRoutes from './routes/auth.js';
 
 dotenv.config()
 
@@ -13,6 +14,7 @@ await connectDB()
 
 app.use(express.json());
 app.use('/prompts', promptRoutes);
+app.use('/auth', authRoutes)
 
 // all wrong links will end up here
 app.all('/', (req, res) => {
