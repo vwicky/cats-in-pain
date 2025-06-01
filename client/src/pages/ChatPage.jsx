@@ -4,6 +4,7 @@ import Header from '../components/Header'
 
 import './ChatPage.css'
 import { useSearchParams } from 'react-router'
+import { useUser } from '../hooks/useUser'
 
 const mockPromptItem = {
   date: new Date().toDateString(),
@@ -19,11 +20,14 @@ function ChatPage() {
   const [result, setResult] = useState(null);
   const [isWaiting, setIsWaiting] = useState(false)
 
+  const [prompt, setPrompt] = useState(null);
+
+  const {data: user, isLoading} = useUser();
+
   const [searchParams] = useSearchParams();
   const incomingPrompt = searchParams.get('prompt') || '';
 
   const [currentTextInput, setCurrentTextInput] = useState('')
-
   const [uploadedImage, setUploadedImage] = useState(null);
 
   // for a time being
@@ -60,6 +64,49 @@ function ChatPage() {
     )
   }
 
+  const makeInput = () => {
+    const input = {
+      type: "text",
+      data: {
+        text: currentTextInput
+      }
+    }
+    return input
+  }
+
+  const saveInDB = async (promptItem) => {
+    const resultData = promptItem
+
+    const response = await fetch('http://localhost:5000/prompts/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(resultData)
+    });
+    const userResponse = await response.json();
+
+    console.log(userResponse);
+    return userResponse
+  }
+  const saveFavouritePromptInDB = async () => {
+    const sprompt = {
+      userId: user._id,
+      promptId: prompt._id
+    }
+    const response = await fetch('http://localhost:5000/sprompts/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(sprompt)
+    });
+    const userResponse = await response.json();
+
+    console.log(userResponse);
+    return userResponse
+  }
+
   const generateResult = async () => {
     if (isWaiting) {
       alert('Please, wait for previous response to generate')
@@ -67,14 +114,21 @@ function ChatPage() {
     }
 
     // TODO: change to normal generation
-    const input = makeMockInput()
+    const input = makeInput()
     const result = await makeMockOutput()
 
+    console.log(user);
+    
     const promptItem = {
+      userId: user._id,
       date: new Date().toISOString(),
       summarization: input.data.text,
       result: result
     }
+    
+    const response = await saveInDB(promptItem)
+    console.log(response);
+    setPrompt(response)
 
     setResult(result)
     setPrompts(prev => [promptItem, ...prev])
@@ -116,17 +170,7 @@ function ChatPage() {
       alert('Please enter a prompt before saving.');
       return;
     }
-
-    const savedPrompt = {
-      date: new Date().toISOString(),
-      summarization: currentTextInput,
-      result: {
-        healthy: null,
-        ill: null
-      }
-    }
-
-    setPrompts(prev => [savedPrompt, ...prev]);
+    saveFavouritePromptInDB()
     alert('Prompt saved!');
   }}
   className="save-button"

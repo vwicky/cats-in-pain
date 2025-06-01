@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import './UserPage.css'
 import { useUser } from '../hooks/useUser'
+import { useUserPrompts } from '../hooks/useUserPrompts'
 
 const mockUser = {
   id: 1,
@@ -24,13 +25,25 @@ function UserPage() {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const { data: user, isLoading } = useUser();
+  const { data: user, isLoading: userLoading } = useUser();
+  const { data: newSavedPrompts = [], isLoading: promptsLoading } = useUserPrompts(user?._id);
+  
   const [savedPrompts, setSavedPrompts] = useState([])
   const [filter, setFilter] = useState('all');
 
   console.log(user);
-  
 
+  const getSavedPrompts = async() => {
+    const response = await fetch(`http://localhost:5000/prompts/user/${user._id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const userResponse = await response.json();
+    setSavedPrompts(userResponse)
+    return userResponse
+  }
 
   useEffect(() => {
     const userId = id
@@ -38,9 +51,9 @@ function UserPage() {
       setSavedPrompts(mockPrompts)
     }
     else {
-      // TODO
+      getSavedPrompts()
     }
-  }, [id])
+  }, [user])
 
   const formatTimeAgo = (timestamp) => {
     const diff = Date.now() - timestamp
@@ -108,15 +121,15 @@ return (
 </div>
     </div>
 
-    {savedPrompts.length === 0 ? (
+    {newSavedPrompts.length === 0 ? (
       <p className="empty-message">No saved prompts</p>
     ) : (
       <ul className="prompt-list">
-        {savedPrompts.map((prompt, index) => (
+        {newSavedPrompts.map((prompt, index) => (
           <li key={index} className="prompt-item">
-            <div onClick={() => handlePromptClick(prompt.text)} className="prompt-content">
-              <p className="prompt-text">{prompt.text}</p>
-              <span className="timestamp">{formatTimeAgo(prompt.timestamp)}</span>
+            <div onClick={() => handlePromptClick(prompt.summarization)} className="prompt-content">
+              <p className="prompt-text">{prompt.summarization} | {prompt.result.healthy}✔, {prompt.result.ill}❌</p>
+              <span className="timestamp">{formatTimeAgo(prompt.createdAt)}</span>
             </div>
             <button onClick={() => handleDelete(index)} className="delete-button">✕</button>
           </li>

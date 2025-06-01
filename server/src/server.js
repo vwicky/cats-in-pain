@@ -6,6 +6,7 @@ import connectDB from './db/mongodb.js'
 import promptRoutes from './routes/prompt.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';
+import savedPromptRoutes from './routes/sprompts.js'
 
 dotenv.config()
 
@@ -20,6 +21,7 @@ app.use(cors({
   credentials: true
 }));
 app.use('/prompts', promptRoutes);
+app.use('/sprompts', savedPromptRoutes);
 app.use('/user', userRoutes);
 app.use('/auth', authRoutes)
 
