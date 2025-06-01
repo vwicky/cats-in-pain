@@ -1,0 +1,40 @@
+services:
+  frontend:
+    build: ./client
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - cats-net
+
+  backend:
+    build: ./server
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URL=mongodb+srv://viktirzozulka:WtI19DhZtfD7y5IA@generalcluster.y3zvblm.mongodb.net/
+      - JWT_SECRET=secret_key
+    depends_on:
+      - mongo
+    networks:
+      - cats-net
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - cats-net
+
+volumes:
+  mongo-data:
+
+networks:
+  cats-net:
+    driver: bridge
