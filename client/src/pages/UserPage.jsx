@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import './UserPage.css'
+import { useUser } from '../hooks/useUser'
 
 const mockUser = {
   id: 1,
@@ -23,16 +24,21 @@ function UserPage() {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const [user, setUser] = useState(null)
+  const { data: user, isLoading } = useUser();
   const [savedPrompts, setSavedPrompts] = useState([])
-
   const [filter, setFilter] = useState('all');
 
+  console.log(user);
+  
+
+
   useEffect(() => {
-    const userId = parseInt(id)
+    const userId = id
     if (userId === mockUser.id) {
-      setUser(mockUser)
       setSavedPrompts(mockPrompts)
+    }
+    else {
+      // TODO
     }
   }, [id])
 

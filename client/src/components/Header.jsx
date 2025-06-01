@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import './Header.css'
 
 import imageLogo from '../assets/cat.svg'
+import { useUser } from '../hooks/useUser'
 
 const mockUser = {
   id: 1,
@@ -14,7 +15,8 @@ const mockUser = {
 
 function Header() {
   const [theme, setTheme] = useState('light')
-  const [user, setUser] = useState(null)
+
+  const {data: user, isLoading} = useUser();
 
   useEffect(() => {
     const userId = localStorage.getItem('userId')

@@ -41,20 +41,42 @@ function SignInPage() {
     }
   }
 
-  const handleSignIn = (e) => {
+  const authorizeUser = async () => {
+    const data = {email, password}
+
+    const response = await fetch('http://localhost:5000/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+    const userResponse = await response.json();
+
+    console.log(userResponse);
+    return userResponse
+  }
+
+  const handleSignIn = async (e) => {
     e.preventDefault()
 
     console.log(email, ' ', password)
-    
-    const authResponse = authorizeMockUser()
-    if (authResponse.user === null) {
-      alert(authResponse.message)
-    } 
-    else {
-      // TODO: implement saving into a session
-      localStorage.setItem("userId", mockUser.id)
-      window.location.href = `/user/${mockUser.id}`
-    }
+
+    const authResponse = await authorizeUser()
+    console.log('auth token', authResponse.token);
+    console.log('auth id', authResponse.userId);
+    localStorage.setItem('token', authResponse.token)
+    window.location.href = `/user/${authResponse.userId}`
+
+    // for mock users
+    // if (authResponse.user === null) {
+    //   alert(authResponse.message)
+    // } 
+    // else {
+    //   // TODO: implement saving into a session
+    //   localStorage.setItem("userId", mockUser.id)
+    //   window.location.href = `/user/${mockUser.id}`
+    // }
   }
 
   return (

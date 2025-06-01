@@ -110,6 +110,30 @@ function ChatPage() {
             )}
 
             <button onClick={generateResult}>Generate Results</button>
+            <button
+  onClick={() => {
+    if (!currentTextInput) {
+      alert('Please enter a prompt before saving.');
+      return;
+    }
+
+    const savedPrompt = {
+      date: new Date().toISOString(),
+      summarization: currentTextInput,
+      result: {
+        healthy: null,
+        ill: null
+      }
+    }
+
+    setPrompts(prev => [savedPrompt, ...prev]);
+    alert('Prompt saved!');
+  }}
+  className="save-button"
+>
+  Save Prompt
+</button>
+
           </div>
           <div className="right">
             <h2>results here</h2>
